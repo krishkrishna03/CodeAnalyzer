@@ -10,7 +10,7 @@ const CodeInput = ({ code, setCode }) => {
         value={code}
         onChange={(e) => setCode(e.target.value)}
         rows={10}
-        className="w-full p-4 border-2 border-purple-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm font-mono"
+        className="w-full p-4 border-2 border-purple-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors duration-200 text-sm font-mono shadow-sm"
         placeholder="e.g., function greet() { console.log('Hello') }"
       />
     </div>
