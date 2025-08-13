@@ -1,70 +1,225 @@
-# Getting Started with Create React App
+# CodeAnalyzer - AI-Powered Code Review & Debugging
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A comprehensive, beginner-friendly web application that analyzes code in multiple programming languages, providing line-by-line explanations, code review findings, and safe JavaScript execution - all running entirely in your browser with complete privacy.
 
-## Available Scripts
+## 🌟 Features
 
-In the project directory, you can run:
+### 🎯 **Automatic Language Detection**
+- Intelligent detection of 7+ programming languages
+- Confidence scoring with detailed reasoning
+- Manual language override option
+- Support for JavaScript, Python, Java, HTML, CSS, SQL, and Shell scripts
 
-### `npm start`
+### 📖 **Line-by-Line Code Explanations**
+- Plain English explanations for every line of code
+- Programming concept definitions and examples
+- Syntax highlighting and error detection
+- Interactive expandable explanations
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 🔍 **Comprehensive Code Review**
+- **Syntax Analysis**: Detects errors, missing semicolons, unmatched brackets
+- **Logic Review**: Finds potential bugs, unreachable code, logic errors
+- **Style Checking**: Enforces best practices and coding standards
+- **Security Scanning**: Identifies vulnerabilities and security risks
+- **Performance Analysis**: Suggests optimizations and efficiency improvements
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 🚀 **Safe JavaScript Execution**
+- Sandboxed code execution environment
+- Real-time console output capture
+- Error handling with stack traces
+- Timeout protection against infinite loops
+- No access to sensitive browser APIs
 
-### `npm test`
+### 📱 **Modern User Experience**
+- Responsive design for all devices
+- Dark/light theme toggle
+- Keyboard shortcuts for power users
+- Offline functionality (PWA)
+- Export analysis reports as HTML
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 🔒 **Privacy-First Design**
+- **100% client-side processing** - your code never leaves your device
+- No external API calls or data transmission
+- No tracking or analytics
+- Works completely offline after first load
 
-### `npm run build`
+## 🚀 Getting Started
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Online Usage
+Visit the live application at: [Your deployment URL]
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Local Development
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. **Clone the repository**
+   ```bash
+   git clone [repository-url]
+   cd codeanalyzer
+   ```
 
-### `npm run eject`
+2. **Start a local server**
+   ```bash
+   # Using Python 3
+   python -m http.server 8000
+   
+   # Using Node.js
+   npx serve .
+   
+   # Using PHP
+   php -S localhost:8000
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. **Open in browser**
+   Navigate to `http://localhost:8000`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 📖 How to Use
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Basic Usage
+1. **Paste your code** into the editor
+2. **Click "Analyze Code"** to get comprehensive analysis
+3. **Explore the results** in three tabs:
+   - **Line-by-Line**: Click any line for detailed explanations
+   - **Code Review**: See categorized findings and suggested fixes
+   - **Debug Console**: View execution results (JavaScript only)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Advanced Features
+- **Language Override**: Use the dropdown to manually set the language
+- **Run JavaScript**: Execute JS code safely in the browser
+- **Export Reports**: Download HTML reports of your analysis
+- **Keyboard Shortcuts**:
+  - `Ctrl+Enter`: Analyze code
+  - `Ctrl+Shift+Enter`: Run JavaScript
+  - `Ctrl+K`: Clear code
 
-## Learn More
+## 🏗️ Architecture
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### File Structure
+```
+codeanalyzer/
+├── index.html              # Main application page
+├── css/styles.css          # Comprehensive styling
+├── js/
+│   ├── detector.js         # Language detection engine
+│   ├── explainers/         # Line-by-line explanation modules
+│   │   ├── javascript.js
+│   │   ├── python.js
+│   │   ├── java.js
+│   │   ├── html.js
+│   │   ├── css.js
+│   │   └── sql.js
+│   ├── reviewers/          # Code review analysis modules
+│   │   ├── javascript.js
+│   │   ├── python.js
+│   │   ├── java.js
+│   │   ├── html.js
+│   │   ├── css.js
+│   │   └── sql.js
+│   ├── runner.js           # Safe JavaScript execution
+│   └── ui.js              # User interface controller
+├── vendor/                 # Local dependencies
+│   ├── prism.js           # Syntax highlighting
+│   └── prism.css
+├── images/
+│   └── logo.svg
+├── manifest.webmanifest   # PWA configuration
+├── service-worker.js      # Offline functionality
+└── README.md
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Core Components
 
-### Code Splitting
+#### 🎯 Language Detection (`detector.js`)
+- Rule-based pattern matching
+- Confidence scoring algorithm
+- Support for 7+ languages
+- Extensible architecture for new languages
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+#### 📝 Code Explainers (`explainers/`)
+- Language-specific explanation engines
+- Syntax concept definitions
+- Error detection and suggestions
+- Beginner-friendly terminology
 
-### Analyzing the Bundle Size
+#### 🔍 Code Reviewers (`reviewers/`)
+- Multi-category analysis (Syntax, Logic, Style, Security, Performance)
+- Severity classification (Error, Warning, Info)
+- Actionable suggestions with code examples
+- Best practices enforcement
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+#### 🏃 JavaScript Runner (`runner.js`)
+- Sandboxed execution environment
+- Console output capture
+- Error handling and stack traces
+- Security restrictions and timeouts
 
-### Making a Progressive Web App
+## 🛠️ Supported Languages
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+| Language   | Detection | Explanations | Code Review | Execution |
+|------------|-----------|--------------|-------------|-----------|
+| JavaScript | ✅        | ✅           | ✅          | ✅        |
+| Python     | ✅        | ✅           | ✅          | ❌        |
+| Java       | ✅        | ✅           | ✅          | ❌        |
+| HTML       | ✅        | ✅           | ✅          | ❌        |
+| CSS        | ✅        | ✅           | ✅          | ❌        |
+| SQL        | ✅        | ✅           | ✅          | ❌        |
+| Shell      | ✅        | ❌           | ❌          | ❌        |
 
-### Advanced Configuration
+## 🔧 Technical Details
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Browser Compatibility
+- **Modern browsers** (Chrome 80+, Firefox 75+, Safari 13+, Edge 80+)
+- **ES6+ features** required
+- **Service Worker** support for offline functionality
+- **Web Workers** for safe code execution
 
-### Deployment
+### Performance
+- **Client-side processing** - no server dependencies
+- **Lazy loading** of analysis modules
+- **Efficient DOM manipulation** with minimal reflows
+- **Memory management** for large code files
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Security
+- **Sandboxed execution** environment for JavaScript
+- **No external network requests** during analysis
+- **XSS protection** with proper HTML escaping
+- **CSP-compliant** code structure
 
-### `npm run build` fails to minify
+## 🤝 Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+We welcome contributions! Here's how you can help:
+
+### Adding New Languages
+1. Create detection patterns in `js/detector.js`
+2. Add explainer module in `js/explainers/[language].js`
+3. Add reviewer module in `js/reviewers/[language].js`
+4. Update the UI language dropdown
+5. Add tests and documentation
+
+### Improving Analysis
+- Enhance existing language support
+- Add new code review categories
+- Improve explanation quality
+- Add more syntax patterns
+
+### Bug Reports & Feature Requests
+Please use the issue tracker to report bugs or suggest features.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- **Prism.js** for syntax highlighting
+- **Modern CSS** techniques for responsive design
+- **Web Standards** for offline functionality
+- **Open Source Community** for inspiration and best practices
+
+## 📞 Support
+
+- **Documentation**: Check this README and inline code comments
+- **Issues**: Use the GitHub issue tracker
+- **Community**: Join discussions in the repository
+
+---
+
+**CodeAnalyzer** - Making code analysis accessible to everyone, one line at a time. 🚀
