@@ -5,7 +5,7 @@ export default function App() {
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const GEMINI_API_KEY = "YOUR_GEMINI_API_KEY"; // Replace with your Gemini API key
+  const GEMINI_API_KEY = "AIzaSyAFVmsFxKsTfBA1wHeFIR9Iao_w2TH16yQ"; // Replace with your Gemini API key
 
   const analyzeCode = async () => {
     if (!code.trim()) {
