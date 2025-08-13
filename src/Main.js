@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import "prismjs/themes/prism-tomorrow.css"; // Syntax highlighting theme
+import "prismjs/themes/prism-tomorrow.css";
 import Prism from "prismjs";
 
 export default function App() {
   const [code, setCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [analysis, setAnalysis] = useState(null);
+  const [activeTab, setActiveTab] = useState("language");
 
   const GEMINI_API_KEY = "AIzaSyDB_xgZ5zXjLpDJH3X1PEk0l2HtJKQ4oEk"; // Replace before deploying
 
@@ -41,7 +42,6 @@ export default function App() {
       const data = await response.json();
       let textResponse = data?.candidates?.[0]?.content?.parts?.[0]?.text || "";
 
-      // Try parsing JSON if Gemini returned structured data
       try {
         const parsed = JSON.parse(textResponse);
         setAnalysis(parsed);
@@ -53,7 +53,34 @@ export default function App() {
       setAnalysis({ explanation: "❌ Error analyzing code. Try again." });
     } finally {
       setLoading(false);
-      setTimeout(() => Prism.highlightAll(), 0); // Highlight code
+      setTimeout(() => Prism.highlightAll(), 0);
+    }
+  };
+
+  const renderTabContent = () => {
+    if (!analysis) return null;
+
+    switch (activeTab) {
+      case "language":
+        return <p className="text-lg">{analysis.language || "N/A"}</p>;
+      case "output":
+        return <pre className="whitespace-pre-wrap">{analysis.intendedOutput || "N/A"}</pre>;
+      case "errors":
+        return (
+          <ul className="list-disc list-inside space-y-1">
+            {analysis.errors?.map((err, i) => <li key={i}>{err}</li>) || <li>No errors found</li>}
+          </ul>
+        );
+      case "explanation":
+        return <p className="whitespace-pre-wrap">{analysis.explanation || "N/A"}</p>;
+      case "fix":
+        return (
+          <pre className="language-php rounded-md p-2 bg-gray-900 overflow-x-auto">
+            <code className="language-php">{analysis.fix || "N/A"}</code>
+          </pre>
+        );
+      default:
+        return null;
     }
   };
 
@@ -80,47 +107,21 @@ export default function App() {
       </div>
 
       {analysis && (
-        <div className="w-full max-w-4xl mt-6 space-y-4">
-          {analysis.language && (
-            <div className="bg-gray-800 p-4 rounded-lg shadow-md">
-              <h2 className="text-xl font-bold text-blue-300">📌 Detected Language</h2>
-              <p className="mt-2 text-lg">{analysis.language}</p>
-            </div>
-          )}
-
-          {analysis.intendedOutput && (
-            <div className="bg-gray-800 p-4 rounded-lg shadow-md">
-              <h2 className="text-xl font-bold text-green-300">📤 Predicted Output</h2>
-              <pre className="whitespace-pre-wrap">{analysis.intendedOutput}</pre>
-            </div>
-          )}
-
-          {analysis.errors && (
-            <div className="bg-gray-800 p-4 rounded-lg shadow-md">
-              <h2 className="text-xl font-bold text-red-300">❌ Errors Found</h2>
-              <ul className="list-disc list-inside mt-2 space-y-1">
-                {analysis.errors.map((err, i) => (
-                  <li key={i}>{err}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          {analysis.explanation && (
-            <div className="bg-gray-800 p-4 rounded-lg shadow-md">
-              <h2 className="text-xl font-bold text-yellow-300">💡 Explanation</h2>
-              <p className="mt-2 whitespace-pre-wrap">{analysis.explanation}</p>
-            </div>
-          )}
-
-          {analysis.fix && (
-            <div className="bg-gray-800 p-4 rounded-lg shadow-md">
-              <h2 className="text-xl font-bold text-purple-300">✅ Suggested Fix</h2>
-              <pre className="language-php rounded-md p-2 bg-gray-900">
-                <code className="language-php">{analysis.fix}</code>
-              </pre>
-            </div>
-          )}
+        <div className="w-full max-w-4xl mt-6 bg-gray-800 rounded-lg shadow-md">
+          <div className="flex border-b border-gray-700">
+            {["language", "output", "errors", "explanation", "fix"].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`flex-1 py-2 px-4 text-sm font-semibold capitalize ${
+                  activeTab === tab ? "bg-gray-900 text-blue-400" : "hover:bg-gray-700"
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+          <div className="p-4">{renderTabContent()}</div>
         </div>
       )}
     </div>
