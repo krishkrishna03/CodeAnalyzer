@@ -3,7 +3,7 @@ import CodeInput from "./components/CodeInput";
 import ExplanationBox from "./components/ExplanationBox";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-// ⚠ Replace with your own key (not safe for production frontend)
+// ⚠ Replace with your API key (not safe in frontend for production)
 const genAI = new GoogleGenerativeAI("AIzaSyDB_xgZ5zXjLpDJH3X1PEk0l2HtJKQ4oEk");
 
 function App() {
@@ -19,26 +19,28 @@ function App() {
 
     try {
       setLoading(true);
+      setExplanation("");
+
       const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
       const prompt = `
-You are a friendly code reviewer for beginners. 
-Analyze the following code, detect any bugs, and explain them in very simple terms so a non-coder understands:
+You are a friendly code reviewer for beginners.
+Analyze the following code, find any bugs, and explain them so a non-coder can understand:
 \`\`\`
 ${code}
 \`\`\`
-Output in this format:
-1. Bug Description (short technical reason)
-2. Simple Explanation in layman's terms
-3. Suggestion to fix
+Format your response like:
+1. Bug Description (technical)
+2. Simple Explanation
+3. Suggestion to Fix
       `;
 
       const result = await model.generateContent(prompt);
       const response = await result.response;
       setExplanation(response.text());
     } catch (error) {
-      setExplanation("❌ Error analyzing code. Check console for details.");
       console.error(error);
+      setExplanation("❌ Error analyzing code. Please check your API key and internet connection.");
     } finally {
       setLoading(false);
     }
@@ -53,7 +55,7 @@ Output in this format:
         <CodeInput code={code} setCode={setCode} />
         <div className="flex justify-center my-4">
           <button
-            className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-full transition duration-300 shadow-md"
+            className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-full transition duration-300 shadow-md disabled:opacity-50"
             onClick={handleAnalyze}
             disabled={loading}
           >
