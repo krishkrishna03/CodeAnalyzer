@@ -4,7 +4,7 @@ import ExplanationBox from "./components/ExplanationBox";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // ⚠ Replace with your API key (not safe in frontend for production)
-const genAI = new GoogleGenerativeAI("AIzaSyDB_xgZ5zXjLpDJH3X1PEk0l2HtJKQ4oEk");
+const genAI = new GoogleGenerativeAI("AIzaSyAFVmsFxKsTfBA1wHeFIR9Iao_w2TH16yQ");
 
 function App() {
   const [code, setCode] = useState("");
